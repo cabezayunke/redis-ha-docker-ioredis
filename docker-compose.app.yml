@@ -1,0 +1,10 @@
+version: '3.7'
+
+services:
+  app:
+    image: node:12
+    command: node /app/app.js
+    environment:
+      SENTINELS_TEST: "${TEST}"
+    volumes:
+      - ./:/app

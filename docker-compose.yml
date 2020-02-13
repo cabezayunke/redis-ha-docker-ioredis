@@ -1,6 +1,7 @@
 version: '3.7'
 
 services:
+ 
   # initial master
   redis-ha-server1:
     build: ./server

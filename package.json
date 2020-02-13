@@ -7,7 +7,11 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "show:slaves": "redis-cli -a redisPassword -p 26381 sentinel slaves mymaster; echo",
     "show:master": "redis-cli -a redisPassword -p 26381 sentinel master mymaster | head -n 7; echo",
-    "failover": "redis-cli -a redisPassword -p 26381 sentinel failover mymaster"
+    "failover": "redis-cli -a redisPassword -p 26381 sentinel failover mymaster",
+    "sentinels_use_master": "TEST=sentinels_use_master docker-compose -f docker-compose.app.yml up",
+    "sentinels_use_replicas": "TEST=sentinels_use_replicas docker-compose -f docker-compose.app.yml up",
+    "single_master": "TEST=single_master docker-compose -f docker-compose.app.yml up",
+    "single_replica": "TEST=single_replica docker-compose -f docker-compose.app.yml up"
   },
   "repository": {
     "type": "git",
