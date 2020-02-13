@@ -1,0 +1,32 @@
+{
+  "name": "redis-ha-docker-ioredis",
+  "version": "1.0.0",
+  "description": "Redis HA environment with docker-compose and ioredis client",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "show:slaves": "redis-cli -a redisPassword -p 26381 sentinel slaves mymaster; echo",
+    "show:master": "redis-cli -a redisPassword -p 26381 sentinel master mymaster | head -n 7; echo",
+    "failover": "redis-cli -a redisPassword -p 26381 sentinel failover mymaster"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cabezayunke/redis-ha-docker-ioredis.git"
+  },
+  "keywords": [
+    "redis",
+    "redis-ha",
+    "ioredis",
+    "sentinels",
+    "redis-sentinels"
+  ],
+  "author": "José Ramón Blanco Rey",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cabezayunke/redis-ha-docker-ioredis/issues"
+  },
+  "homepage": "https://github.com/cabezayunke/redis-ha-docker-ioredis#readme",
+  "dependencies": {
+    "ioredis": "4.14.1"
+  }
+}

@@ -1,0 +1,60 @@
+version: '3.7'
+
+services:
+  # initial master
+  redis-ha-server1:
+    build: ./server
+    container_name: redis-ha-server1
+    ports:
+      - 6381:6379
+    command: redis-server /data/redis.conf
+
+  # replicas
+  redis-ha-server2:
+    build: ./server
+    container_name: redis-ha-server2
+    ports:
+      - 6382:6379
+    command: redis-server /data/redis.conf --replicaof redis-ha-server1 6379 --replica-priority 102
+    links:
+      - redis-ha-server1
+  redis-ha-server3:
+    build: ./server
+    container_name: redis-ha-server3
+    ports:
+      - 6383:6379
+    command: redis-server /data/redis.conf --replicaof redis-ha-server1 6379 --replica-priority 103
+    links:
+      - redis-ha-server1
+
+  # sentinels
+  redis-ha-sentinel1:
+    build: ./sentinel
+    container_name: redis-ha-sentinel1
+    command: redis-server /data/sentinel.conf --sentinel
+    ports:
+      - 26381:26379
+    depends_on:
+      - redis-ha-server1
+    links:
+      - redis-ha-server1
+  redis-ha-sentinel2:
+    build: ./sentinel
+    container_name: redis-ha-sentinel2
+    command: redis-server /data/sentinel.conf --sentinel
+    ports:
+      - 26382:26379
+    depends_on:
+      - redis-ha-server1
+    links:
+      - redis-ha-server1
+  redis-ha-sentinel3:
+    build: ./sentinel
+    container_name: redis-ha-sentinel3
+    command: redis-server /data/sentinel.conf --sentinel
+    ports:
+      - 26383:26379
+    depends_on:
+      - redis-ha-server1
+    links:
+      - redis-ha-server1
