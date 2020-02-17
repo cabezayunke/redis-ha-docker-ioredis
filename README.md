@@ -43,6 +43,13 @@ Double check it worked: `npm run show:master`
 
 #### Try client connection
 
-`node scripts/writeOnMaster.js` will directly connect to server1(master), write a key and read it back again.
+There are 4 commands that will trigger the app.js script and will connect to the node or cluster usnig ioredis client. These are the examples:
 
-`node scripts/writeErrorOnReplica.js` will directly connect to server2(replica) nad try to write a key which will fail.
+
+`npm run single_master` will directly connect to server1(master), write a key and read it back again.
+
+`npm run single_replica` will directly connect to server2(replica) nad try to write a key which will fail.
+
+`npm run sentinels_use_master` will connect to sentinels to ask for the master node, write a key and read it back again.
+
+`npm run sentinels_use_replicas` will connect to sentinels to ask for a replica node and try to write a key which will fail.
